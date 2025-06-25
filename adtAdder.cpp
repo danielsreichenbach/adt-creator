@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
-#include "thread_pool.hpp"
+#include "BS_thread_pool.hpp"
 
 void writeAdt(std::string sourceFile, std::string dstDir, std::string dstName, int minAdtX, int minAdtY, int maxAdtX, int maxAdtY)
 {
@@ -56,8 +56,8 @@ void writeAdt(std::string sourceFile, std::string dstDir, std::string dstName, i
 
 	std::cout << "Writing ADT files\n";
 
-	synced_stream sync_out;
-	thread_pool pool;
+	BS::synced_stream sync_out;
+	BS::thread_pool pool;
 	for (int x = minAdtX; x <= maxAdtX; ++x)
 	{
 		for (int y = minAdtY; y <= maxAdtY; ++y)

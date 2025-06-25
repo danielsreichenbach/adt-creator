@@ -16,11 +16,16 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include <windows.h> //Used in creating directory
+#ifdef _WIN32
+#include <windows.h>
+#include <direct.h>
+#else
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
+#endif
 
-#include "thread_pool.hpp"
+#include "BS_thread_pool.hpp"
 #include "list.h" //Makes my life so much easier
 #include "zoneGroup.h" //Custom class that contains information about a group of ADTs
 #include "offsetFix.h" //Used in fixing offsets after movement
@@ -38,8 +43,8 @@ int mash(list<ZoneGroup> zoneGroupList, std::string outputName, bool offsetFixEn
     if(offsetFixEnabled){
         std::cout << "Correcting offsets\n";
 
-	    synced_stream sync_out;
-	    thread_pool pool;
+	    BS::synced_stream sync_out;
+	    BS::thread_pool pool;
 
 
         for(int i=0; i < zoneGroupList[0].getSize(); i++) //Fix each file
